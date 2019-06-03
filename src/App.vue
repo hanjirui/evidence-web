@@ -1,24 +1,10 @@
 <template>
-  <el-container>
-    <el-header height="80px">
-      <Header/>
-    </el-header>
-    <el-container>
-      <div class="container-main">
-        <router-view></router-view>
-      </div>
-    </el-container>
-  </el-container>
+      <router-view></router-view>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-
 export default {
   name: 'App',
-  components: {
-    Header
-  },
   data () {
     return {
     }
