@@ -48,7 +48,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (localStorage.getItem("isLogin")){
+  if (localStorage.getItem("isLogin") == "true"){
     if(to.path === '/Login'){
       next({ path: '/ContentWrapper' })
     } else {
@@ -80,9 +80,12 @@ axios.interceptors.response.use(
       return response;
   },
   error => {
+    alert("333")
       if (error.response) {
+
           switch (error.response.status) {
               case 401:
+                alert("401")
                 localStorage.setItem("isLogin", false)
                 router.replace({path: '/Login'})
           }
