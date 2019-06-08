@@ -39,9 +39,8 @@ const routes = [
                 { path: '/Login', component: Login, name: "Login" }
               ]
 
-var isLogin = false
 Vue.prototype.loginStatus = function (){
-  isLogin = true
+  localStorage.setItem("isLogin", true)
 }
 
 const router = new VueRouter({
@@ -49,8 +48,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  alert("aaa"+isLogin)
-  if (isLogin){
+  if (localStorage.getItem("isLogin")){
     if(to.path === '/Login'){
       next({ path: '/ContentWrapper' })
     } else {
@@ -85,7 +83,7 @@ axios.interceptors.response.use(
       if (error.response) {
           switch (error.response.status) {
               case 401:
-                // store.commit(types.LOGOUT);
+                localStorage.setItem("isLogin", false)
                 router.replace({path: '/Login'})
           }
       }
